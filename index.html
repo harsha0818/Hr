@@ -1,222 +1,623 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f7fb">
-  <title>My private space</title>
+
+  <title>My Private Space</title>
+
   <style>
-    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172033; background: #f5f7fb; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; padding: 28px 16px; display: grid; place-items: center; }
-    main { width: min(100%, 520px); }
-    .card { background: white; border: 1px solid #e6eaf2; border-radius: 18px; padding: 28px; box-shadow: 0 16px 48px #24304a12; }
-    h1 { margin: 0 0 8px; font-size: 1.65rem; }
-    p { color: #667085; line-height: 1.5; }
-    label { display: block; margin: 16px 0 6px; font-weight: 650; font-size: .94rem; }
-    input, textarea { width: 100%; padding: 12px 13px; border: 1px solid #cfd6e2; border-radius: 10px; font: inherit; color: inherit; background: white; }
-    input:focus, textarea:focus { outline: 3px solid #dfe7ff; border-color: #536dfe; }
-    textarea { min-height: 100px; resize: vertical; }
-    button { border: 0; border-radius: 10px; padding: 11px 15px; background: #465fff; color: white; font: inherit; font-weight: 700; cursor: pointer; }
-    button:disabled { opacity: .6; cursor: wait; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .secondary { background: #edf0f7; color: #27324a; }
-    .danger { background: #fff0ef; color: #b42318; padding: 8px 11px; }
-    .hidden { display: none !important; }
-    .message { min-height: 1.5em; margin: 12px 0 0; font-size: .94rem; }
-    .message.error { color: #b42318; }
-    .message.success { color: #067647; }
-    .entry { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; border-top: 1px solid #edf0f5; padding: 14px 0; }
-    .entry p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; color: #27324a; }
-    .entry time { display: block; margin-top: 6px; color: #8992a3; font-size: .8rem; }
-    #entries { margin-top: 20px; }
-    .topline { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-    .topline h1 { margin: 0; }
-    .small { font-size: .9rem; }
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f5f7fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 16px;
+      display: grid;
+      place-items: center;
+      background: #f5f7fb;
+    }
+
+    main {
+      width: min(100%, 700px);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e6eaf2;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 16px 48px #24304a12;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.65rem;
+    }
+
+    p {
+      color: #667085;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-weight: 650;
+      font-size: .94rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #cfd6e2;
+      border-radius: 10px;
+      font: inherit;
+      color: inherit;
+      background: white;
+    }
+
+    input:focus {
+      outline: 3px solid #dfe7ff;
+      border-color: #536dfe;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 15px;
+      background: #465fff;
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .secondary {
+      background: #edf0f7;
+      color: #27324a;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .message {
+      min-height: 1.5em;
+      margin: 12px 0 0;
+      font-size: .94rem;
+    }
+
+    .message.error {
+      color: #b42318;
+    }
+
+    .message.success {
+      color: #067647;
+    }
+
+    /* =========================
+       DEMO 2 PAGE
+    ========================= */
+
+    #demo-page {
+      background-color: hwb(0 69% 10%);
+      font-family: monospace;
+      font-size: 20px;
+      color: black;
+      min-height: 100vh;
+      padding: 30px 20px;
+      border-radius: 18px;
+    }
+
+    #demo-page marquee {
+      color: whitesmoke;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+    }
+
+    #demo-page mark {
+      font-family:
+        'Lucida Sans',
+        'Lucida Sans Regular',
+        'Lucida Grande',
+        'Lucida Sans Unicode',
+        Geneva,
+        Verdana,
+        sans-serif;
+    }
+
+    #demo-page .demo-title {
+      font-size: 8px;
+      font-family:
+        'Trebuchet MS',
+        'Lucida Sans Unicode',
+        'Lucida Grande',
+        'Lucida Sans',
+        Arial,
+        sans-serif;
+      color: #005ff0;
+    }
+
+    #demo-page .demo-text {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #demo-page input {
+      margin-top: 10px;
+      display: block;
+    }
+
+    #demo-page .demo-button {
+      margin-top: 10px;
+      background: #005ff0;
+      color: white;
+    }
   </style>
 </head>
+
 <body>
+
   <main>
+
+    <!-- =========================
+         LOGIN PAGE
+    ========================== -->
+
     <section class="card" id="auth-view">
+
       <h1 id="auth-title">Sign in</h1>
-      <p id="auth-description">Sign in to open your private space.</p>
+
+      <p id="auth-description">
+        Sign in to open your private space.
+      </p>
+
       <form id="auth-form">
+
         <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" required>
+
+        <input
+          id="email"
+          type="email"
+          autocomplete="email"
+          required
+        >
+
         <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" minlength="8" required>
+
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          minlength="8"
+          required
+        >
+
         <div class="actions">
-          <button id="auth-submit" type="submit">Sign in</button>
-          <button id="mode-toggle" class="secondary" type="button">Create account</button>
+
+          <button
+            id="auth-submit"
+            type="submit">
+            Sign in
+          </button>
+
+          <button
+            id="mode-toggle"
+            class="secondary"
+            type="button">
+            Create account
+          </button>
+
         </div>
+
       </form>
-      <p id="auth-message" class="message" role="status" aria-live="polite"></p>
+
+      <p
+        id="auth-message"
+        class="message"
+        role="status"
+        aria-live="polite">
+      </p>
+
     </section>
 
-    <section class="card hidden" id="app-view">
-      <div class="topline">
-        <div><h1>My private space</h1><p class="small" id="user-email"></p></div>
-        <button id="sign-out" class="secondary" type="button">Sign out</button>
-      </div>
-      <form id="entry-form">
-        <label for="content">Save a note</label>
-        <textarea id="content" maxlength="10000" required placeholder="Write something only your account can access..."></textarea>
-        <div class="actions"><button id="save-button" type="submit">Save note</button></div>
+
+    <!-- =========================
+         DEMO 2 PAGE
+         THIS APPEARS AFTER LOGIN
+    ========================== -->
+
+    <section
+      id="demo-page"
+      class="hidden">
+
+      <marquee>
+        HELLO THIS IS HARSHA REDDY
+        YOU KNOWN AS <b><i>HR</i></b>
+      </marquee>
+
+      <h1 class="demo-title">
+        <mark>CEO</mark>
+        OF THE GOOGLE
+      </h1>
+
+      <p class="demo-text">
+        hello this is harsha reddy you known me as student
+        in prathibha junior college
+        and i also coded some of login pages before 2 years
+      </p>
+
+
+      <!-- Original form from 1.html -->
+
+      <form id="demo-form">
+
+        <input
+          type="password"
+          id="demo-password"
+          placeholder="Password">
+
+        <input
+          type="email"
+          id="demo-email"
+          placeholder="Email">
+
+        <button
+          type="submit"
+          class="demo-button">
+          sub
+        </button>
+
       </form>
-      <p id="data-message" class="message" role="status" aria-live="polite"></p>
-      <div id="entries" aria-live="polite"></div>
+
+
+      <div class="actions">
+
+        <button
+          id="logout-button"
+          class="secondary"
+          type="button">
+          Sign out
+        </button>
+
+      </div>
+
     </section>
+
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    const SUPABASE_URL = 'https://ftmvbqaeicfwhhuggldw.supabase.co';
-    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_zW8MLdOKg51igV6JKffNaw_Qi28NGd8';
-    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
-    const authView = document.querySelector('#auth-view');
-    const appView = document.querySelector('#app-view');
-    const authForm = document.querySelector('#auth-form');
-    const authMessage = document.querySelector('#auth-message');
-    const dataMessage = document.querySelector('#data-message');
-    const modeToggle = document.querySelector('#mode-toggle');
-    const authSubmit = document.querySelector('#auth-submit');
-    const entries = document.querySelector('#entries');
+  <!-- Supabase -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      'https://ftmvbqaeicfwhhuggldw.supabase.co';
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      'sb_publishable_zW8MLdOKg51igV6JKffNaw_Qi28NGd8';
+
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+    /* =========================
+       ELEMENTS
+    ========================== */
+
+    const authView =
+      document.querySelector('#auth-view');
+
+    const demoPage =
+      document.querySelector('#demo-page');
+
+    const authForm =
+      document.querySelector('#auth-form');
+
+    const authMessage =
+      document.querySelector('#auth-message');
+
+    const modeToggle =
+      document.querySelector('#mode-toggle');
+
+    const authSubmit =
+      document.querySelector('#auth-submit');
+
     let createMode = false;
 
-    function setMessage(element, text, isError = false) {
+
+    /* =========================
+       MESSAGE
+    ========================== */
+
+    function setMessage(
+      element,
+      text,
+      isError = false
+    ) {
+
       element.textContent = text;
-      element.className = `message${text ? (isError ? ' error' : ' success') : ''}`;
+
+      element.className =
+        `message${text
+          ? (isError ? ' error' : ' success')
+          : ''}`;
     }
 
-    function showAuth() {
+
+    /* =========================
+       SHOW LOGIN
+    ========================== */
+
+    function showLogin() {
+
       authView.classList.remove('hidden');
-      appView.classList.add('hidden');
+
+      demoPage.classList.add('hidden');
     }
 
-    async function showApp(user) {
+
+    /* =========================
+       SHOW DEMO PAGE
+    ========================== */
+
+    function showDemoPage() {
+
       authView.classList.add('hidden');
-      appView.classList.remove('hidden');
-      document.querySelector('#user-email').textContent = user.email || 'Signed in';
-      await loadEntries();
+
+      demoPage.classList.remove('hidden');
     }
 
-    modeToggle.addEventListener('click', () => {
-      createMode = !createMode;
-      document.querySelector('#auth-title').textContent = createMode ? 'Create account' : 'Sign in';
-      document.querySelector('#auth-description').textContent = createMode
-        ? 'Create your account, then use it to sign in.'
-        : 'Sign in to open your private space.';
-      authSubmit.textContent = createMode ? 'Create account' : 'Sign in';
-      modeToggle.textContent = createMode ? 'Back to sign in' : 'Create account';
-      document.querySelector('#password').autocomplete = createMode ? 'new-password' : 'current-password';
-      setMessage(authMessage, '');
-    });
 
-    authForm.addEventListener('submit', async (event) => {
-      event.preventEvent?.();
-      event.preventDefault();
-      authSubmit.disabled = true;
-      setMessage(authMessage, '');
-      const email = document.querySelector('#email').value.trim();
-      const password = document.querySelector('#password').value;
-      try {
-        const result = createMode
-          ? await db.auth.signUp({ email, password, options: { emailRedirectTo: window.location.href } })
-          : await db.auth.signInWithPassword({ email, password });
-        if (result.error) throw result.error;
-        if (createMode && !result.data.session) {
-          setMessage(authMessage, 'Account created. Check your email to confirm it, then sign in.');
-        } else if (result.data.user) {
-          await showApp(result.data.user);
+    /* =========================
+       CREATE ACCOUNT / LOGIN MODE
+    ========================== */
+
+    modeToggle.addEventListener(
+      'click',
+      () => {
+
+        createMode = !createMode;
+
+        document.querySelector('#auth-title')
+          .textContent =
+          createMode
+            ? 'Create account'
+            : 'Sign in';
+
+        document.querySelector('#auth-description')
+          .textContent =
+          createMode
+            ? 'Create your account, then use it to sign in.'
+            : 'Sign in to open your private space.';
+
+        authSubmit.textContent =
+          createMode
+            ? 'Create account'
+            : 'Sign in';
+
+        modeToggle.textContent =
+          createMode
+            ? 'Back to sign in'
+            : 'Create account';
+
+        document.querySelector('#password')
+          .autocomplete =
+          createMode
+            ? 'new-password'
+            : 'current-password';
+
+        setMessage(authMessage, '');
+      }
+    );
+
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    authForm.addEventListener(
+      'submit',
+      async (event) => {
+
+        event.preventDefault();
+
+        authSubmit.disabled = true;
+
+        setMessage(authMessage, '');
+
+        const email =
+          document.querySelector('#email')
+            .value
+            .trim();
+
+        const password =
+          document.querySelector('#password')
+            .value;
+
+        try {
+
+          const result =
+            createMode
+
+              ? await db.auth.signUp({
+                  email,
+                  password,
+                  options: {
+                    emailRedirectTo:
+                      window.location.href
+                  }
+                })
+
+              : await db.auth.signInWithPassword({
+                  email,
+                  password
+                });
+
+
+          if (result.error) {
+            throw result.error;
+          }
+
+
+          /* =========================
+             SUCCESSFUL LOGIN
+             OPEN DEMO 2 PAGE
+          ========================== */
+
+          if (
+            result.data.user
+          ) {
+
+            showDemoPage();
+
+          }
+
         }
-      } catch (error) {
-        setMessage(authMessage, error.message || 'Authentication failed. Please try again.', true);
-      } finally {
-        authSubmit.disabled = false;
+
+        catch (error) {
+
+          setMessage(
+            authMessage,
+            error.message ||
+              'Authentication failed. Please try again.',
+            true
+          );
+
+        }
+
+        finally {
+
+          authSubmit.disabled = false;
+
+        }
+
       }
-    });
+    );
 
-    document.querySelector('#sign-out').addEventListener('click', async () => {
-      const { error } = await db.auth.signOut();
-      if (error) setMessage(dataMessage, error.message, true);
-      else showAuth();
-    });
 
-    document.querySelector('#entry-form').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const saveButton = document.querySelector('#save-button');
-      saveButton.disabled = true;
-      setMessage(dataMessage, '');
-      try {
-        const { data: { user }, error: userError } = await db.auth.getUser();
-        if (userError) throw userError;
-        if (!user) throw new Error('Please sign in again.');
-        const content = document.querySelector('#content').value.trim();
-        if (!content) throw new Error('Write a note before saving.');
-        const { error } = await db.from('private_data').insert({ owner_id: user.id, content });
-        if (error) throw error;
-        document.querySelector('#content').value = '';
-        setMessage(dataMessage, 'Note saved.');
-        await loadEntries();
-      } catch (error) {
-        setMessage(dataMessage, error.message || 'Could not save your note.', true);
-      } finally {
-        saveButton.disabled = false;
+    /* =========================
+       DEMO FORM
+    ========================== */
+
+    document.querySelector('#demo-form')
+      .addEventListener(
+        'submit',
+        (event) => {
+
+          event.preventDefault();
+
+          alert('Demo form submitted.');
+
+        }
+      );
+
+
+    /* =========================
+       SIGN OUT
+    ========================== */
+
+    document.querySelector('#logout-button')
+      .addEventListener(
+        'click',
+        async () => {
+
+          const { error } =
+            await db.auth.signOut();
+
+          if (error) {
+
+            alert(error.message);
+
+          }
+          else {
+
+            showLogin();
+
+          }
+
+        }
+      );
+
+
+    /* =========================
+       AUTH STATE
+    ========================== */
+
+    db.auth.onAuthStateChange(
+      (_event, session) => {
+
+        if (session?.user) {
+
+          showDemoPage();
+
+        }
+        else {
+
+          showLogin();
+
+        }
+
       }
-    });
+    );
 
-    async function loadEntries() {
-      entries.replaceChildren();
-      const { data, error } = await db.from('private_data').select('id, content, created_at').order('created_at', { ascending: false });
-      if (error) {
-        setMessage(dataMessage, `${error.message} Check the database setup in README.md.`, true);
-        return;
-      }
-      setMessage(dataMessage, '');
-      if (!data.length) {
-        const empty = document.createElement('p');
-        empty.className = 'small';
-        empty.textContent = 'No notes yet.';
-        entries.append(empty);
-        return;
-      }
-      for (const row of data) {
-        const item = document.createElement('article');
-        item.className = 'entry';
-        const body = document.createElement('div');
-        const text = document.createElement('p');
-        text.textContent = row.content;
-        const time = document.createElement('time');
-        time.dateTime = row.created_at;
-        time.textContent = new Date(row.created_at).toLocaleString();
-        body.append(text, time);
-        const remove = document.createElement('button');
-        remove.className = 'danger';
-        remove.type = 'button';
-        remove.textContent = 'Delete';
-        remove.addEventListener('click', () => deleteEntry(row.id));
-        item.append(body, remove);
-        entries.append(item);
-      }
-    }
 
-    async function deleteEntry(id) {
-      setMessage(dataMessage, '');
-      const { error } = await db.from('private_data').delete().eq('id', id);
-      if (error) setMessage(dataMessage, error.message, true);
-      else await loadEntries();
-    }
+    /* =========================
+       CHECK EXISTING SESSION
+    ========================== */
 
-    db.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) showApp(session.user);
-      else showAuth();
-    });
+    db.auth.getSession()
+      .then(({ data, error }) => {
 
-    db.auth.getSession().then(({ data, error }) => {
-      if (error) setMessage(authMessage, error.message, true);
-      if (data.session?.user) showApp(data.session.user);
-    });
+        if (error) {
+
+          setMessage(
+            authMessage,
+            error.message,
+            true
+          );
+
+          return;
+        }
+
+        if (data.session?.user) {
+
+          showDemoPage();
+
+        }
+
+      });
+
   </script>
+
 </body>
+
 </html>
